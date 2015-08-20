@@ -8,20 +8,35 @@
 // })
 
 
-function checkBrackets(internCode){
-  var correct = true;
-  for (var i = 0; i < internCode.length; i++) {
-    addOpener(internCode.charAt(i));
-    // debugger;
-    if(checkCloser((internCode.charAt(i))) === false){
-      correct = false;
-    }
-  }
-  return correct;
-}
 
 var brackets = [{open:'{',close:'}'},{open:'(',close:')'},{open:'[',close:']'}]
 var internOpeners =[];
+var commentOrString = {on:false,type:'none'}
+
+
+function checkBrackets(internCode){
+  var newCode = stripComments(internCode);
+  return verifyBrackets(newCode);
+}
+
+function stripComments(string) {
+ var newString = string.replace( /(\/[*][^*]*[*]\/)|(\/\/[^\n]*)/gm, "" )
+ return newString;
+}
+
+function verifyBrackets (code){
+  for (var i = 0; i < code.length; i++) {
+      addOpener(code.charAt(i));
+      if(checkCloser((code.charAt(i))) === false){
+        debugger;
+        return false;
+      }
+    }
+    if(internOpeners.length === 0){return true;}
+    return false;
+}
+
+//sdjust string take char if cOS.on = false set to true set type to 'string'
 
 function addOpener(char){
   for (var i = 0; i < brackets.length; i++) {
