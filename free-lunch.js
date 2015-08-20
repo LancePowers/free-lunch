@@ -1,17 +1,5 @@
-// var fs = require('fs')
-// var file = process.argv[2]
-//
-// fs.readFile(file, function (err, contents) {
-//   var internCode = contents.toString();
-//   }
-//   console.log(correct);
-// })
-
-
-
 var brackets = [{open:'{',close:'}'},{open:'(',close:')'},{open:'[',close:']'}]
 var internOpeners =[];
-var commentOrString = {on:false,type:'none'}
 
 
 function checkBrackets(internCode){
@@ -24,6 +12,7 @@ function stripComments(string) {
  return newString;
 }
 
+//loops through chars to process and checks if all openers are closed.
 function verifyBrackets (code){
   for (var i = 0; i < code.length; i++) {
       addOpener(code.charAt(i));
@@ -36,8 +25,7 @@ function verifyBrackets (code){
     return false;
 }
 
-//sdjust string take char if cOS.on = false set to true set type to 'string'
-
+//adds to the opening bracket array
 function addOpener(char){
   for (var i = 0; i < brackets.length; i++) {
     if (char === brackets[i].open) {
@@ -46,6 +34,7 @@ function addOpener(char){
   }
 }
 
+//verify closer matches previous opener and removes from array.
 function checkCloser(char){
   var last = internOpeners.length - 1;
   for (var i = 0; i < brackets.length; i++) {
