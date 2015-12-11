@@ -17,7 +17,6 @@ function verifyBrackets (code){
   for (var i = 0; i < code.length; i++) {
       addOpener(code.charAt(i));
       if(checkCloser((code.charAt(i))) === false){
-        debugger;
         return false;
       }
     }
@@ -47,6 +46,11 @@ function checkCloser(char){
     }
   }
 }
+// console.log( checkBrackets( "var a = function(){return 'b';}") === true);
+console.log( checkBrackets( "var a = function(){return 'b';}") === true );
+// console.log( checkBrackets( "var a = function(){return 'b';" ) === false );
+// console.log( checkBrackets( "/*Comment*/var a = function(){ \n // coment again \n return 'b';" ) === false );
+// console.log( checkBrackets( "var a = function(){return 'b';" ) === false );
 
 
 module.exports = checkBrackets

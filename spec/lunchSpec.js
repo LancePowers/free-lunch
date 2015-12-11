@@ -8,8 +8,9 @@ describe('checkBrackets', function(){
     expect(checkBrackets("{ [ ( ] ) }")).toEqual(false);
     expect(checkBrackets("{ [ }")).toEqual(false);
   })
-  it('should not check comments or strings', function(){
+  it('should not check comments', function(){
     expect(checkBrackets(comment)).toEqual(false);
     expect(checkBrackets(comment2)).toEqual(false);
+    expect(checkBrackets("var a = function(){return 'b';}")).toEqual(true);
   })
 })
